@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato | Pulso Academia</title>
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!--CSS-->
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!--Header com logo local (img local) e nav comum às 3 páginas.-->
+    <header class="cabecalho">
+      <a class="marca" href="index.html">
+        <img src="imagens/logo.svg" alt="logo pulso academia" width="44" height="44">
+        <span>Pulso Academia</span>
+      </a>
+      <nav>
+        <a href="index.html">Início</a>
+        <a href="servicos.html">Serviços</a>
+        <!--.pagina-atual marca o link da página em que o usuário está.-->
+        <a href="contato.html" class="pagina-atual">Contato</a>
+      </nav>
+    </header>
+    <main class="contato">
+      <h1>Entre em contato</h1>
+      <p>Preencha os campos abaixo para conhecer a academia.</p>
+
+      <!--Formulário com nome, email e submit, alinhado ao centro da página.-->
+      <div class="contato-conteudo">
+        <form action="contato.html" method="get">
+          <label for="nome">Nome (obrigatório)</label>
+          <input class="campo" type="text" id="nome" name="nome" required>
+
+          <label for="email">E-mail (obrigatório)</label>
+          <input class="campo" type="email" id="email" name="email" required>
+
+          <input class="botao" type="submit" value="Enviar">
+          <p class="aviso">Formulário de demonstração. Não envia mensagens.</p>
+        </form>
+      </div>
+    </main>
+    <!--Footer comum com copyright e nav de redes sociais com ícones do Font Awesome.
+        target="_blank" abre o link em nova aba; rel="noopener noreferrer" evita que a página
+        aberta tenha acesso a outros dados.-->
+    <footer class="rodape">
+      <p>&copy; 2026 Pulso Academia. Todos os direitos reservados.</p>
+      <nav>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-instagram"></i> Instagram
+        </a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-facebook-f"></i> Facebook
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-youtube"></i> YouTube
+        </a>
+      </nav>
+    </footer>
+  </body>
+</html>

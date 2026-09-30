@@ -1,0 +1,276 @@
+/* box-sizing: border-box inclui padding e borda dentro do width/height declarado. */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: #26332c;
+  background-color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+a {
+  color: #285a3e;
+}
+
+/* :hover é para quando o mouse está em cima do link, mostrar um sublinhado. */
+a:hover {
+  text-decoration: underline;
+}
+
+/* :focus-visible é para ter elementos destacados quando apertamos tab*/ 
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid #285a3e;
+  outline-offset: 4px;
+}
+
+/* Requisito 9: CSS em arquivo externo, ligado às 3 páginas. */
+.cabecalho,
+main,
+.rodape {
+  width: 90%;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+/* Header responsivo, flex deixa a marca à esquerda e o nav à direita
+   na mesma linha, e o align-items center alinha os dois no centro. */
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid #dce3dc;
+}
+
+/* Logo e razão social dentro do header. */
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #26332c;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Nav comum às 3 páginas. */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+nav a {
+  padding: 8px 0;
+  text-decoration: none;
+}
+
+nav .pagina-atual {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+main {
+  padding: 48px 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-size: 42px;
+}
+
+h2 {
+  font-size: 26px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+/* Imagem local no main do index no lado da apresentação. */
+.apresentacao {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 56px;
+}
+
+.destaque {
+  color: #285a3e;
+  font-weight: bold;
+}
+
+.foto {
+  display: block;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+.botao {
+  display: inline-block;
+  padding: 12px 20px;
+  border: 0;
+  background-color: #285a3e;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.botao:hover {
+  background-color: #1d432e;
+  text-decoration: none;
+}
+
+/* Section com 3 colunas em desktop, vira 1 coluna no media query mobile. */
+.beneficios {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+
+.beneficios article {
+  padding: 20px;
+  background-color: #f2f5f1;
+}
+
+.beneficios h3 {
+  margin-top: 0;
+}
+
+.beneficios p {
+  margin-bottom: 0;
+}
+
+/* As duas seções de serviços ficam empilhadas em uma única coluna. */
+.servico {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid #dce3dc;
+}
+
+.foto-servico {
+  margin-top: 24px;
+}
+
+.contato {
+  text-align: center;
+}
+
+/* Formulário no centro da página. */
+.contato-conteudo {
+  display: grid;
+  grid-template-columns: 440px;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  margin-top: 32px;
+}
+
+/* Labels pareadas com os inputs, validação básica é feita no HTML. */
+form {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.campo {
+  width: 100%;
+  margin-bottom: 24px;
+  padding: 12px;
+  border: 1px solid #87968b;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+form .botao {
+  width: 100%;
+}
+
+.aviso {
+  color: #56645a;
+  font-size: 14px;
+}
+
+/* Footer com copyright e nav de redes sociais com ícones do Font Awesome. */
+.rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
+  border-top: 1px solid #dce3dc;
+  font-size: 14px;
+}
+
+.rodape nav a {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+/* Abordagem desktop first entrando os ajustes para celulares e phablets.
+   em mobile o header vira coluna, com os elementos centralizados. */
+@media (max-width: 767px) {
+  .cabecalho,
+  .rodape {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+
+  main {
+    padding: 32px 0;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  /* A section de 3 colunas vira 1 coluna em mobile. */
+  .apresentacao,
+  .beneficios,
+  .contato-conteudo {
+    grid-template-columns: 1fr;
+  }
+
+  .apresentacao {
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .contato-conteudo {
+    gap: 24px;
+  }
+
+  .foto {
+    height: 240px;
+  }
+}

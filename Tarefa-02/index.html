@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefa 2 - Dev Web - Bernardo Eliziario</title>
+</head>
+<body>
+    
+    <header>
+        <h1> Envie suas opiniões sobre a página pessoal do Bernardo Eliziario.</h1>
+    </header>
+
+    <main> 
+        <h2>Avaliação da Página</h2>
+        <form action="#" method="post">
+            <div>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <br>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <br>
+
+            <fieldset>
+                <legend>Feedbacks</legend>
+                <br>
+                <div>
+                    <label for="origem">Como você encontrou minha página?</label>
+                    <select id="origem" name="origem" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="Google">Google</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Amigos">Amigos</option>
+                        <option value="Whatsapp">Whatsapp</option>
+                    </select>
+                </div>
+                <br>
+
+                <div>
+                    <p>Você gostou da minha página?</p>
+x                    <label for="sim">Sim</label>
+                    <input type="radio" id="nao" name="gostou" value="nao">
+                    <label for="nao">Não</label>
+                    <input type="radio" id="nao-sei-bem" name="gostou" value="Não sei bem">
+                    <label for="nao-sei-bem">Não sei bem</label>
+                </div>
+                <br>
+                <div>
+                    <p>O que mais te atraiu em minha página?</p>
+                    <input type="checkbox" id="facilidade-de-uso" name="atracao" value="Facilidade de uso">
+                    <label for="facilidade-de-uso">Facilidade de uso</label><br>
+                    <input type="checkbox" id="midias" name="atracao" value="Mídias">
+                    <label for="midias">Mídias</label><br>
+                    <input type="checkbox" id="conteudo" name="atracao" value="Conteúdo">
+                    <label for="conteudo">Conteúdo</label><br>
+                    <input type="checkbox" id="design" name="atracao" value="Design">
+                    <label for="design">Design</label><br>
+                </div>
+                <br>
+                <div>
+                    <input type="submit" value="Enviar">
+                    <input type="reset" value="Limpar Formulário">
+                </div>
+            </fieldset>
+        </form>
+        <br>
+        
+        <article>
+            <h3>Vídeo Interessante</h3>
+            <video controls width="640" height="360" aria-label="Vídeo de uma lua vermelha cheia por trás de uma montanha.">
+                <source src="arquivos/videodalua.mp4" type="video/mp4">
+                <source src="arquivos/videodalua.webm" type="video/webm">
+                <p>Seu navegador não suporta a tag de vídeo. Você pode <a href="https://www.pexels.com/pt-br/video/lua-vermelha-crescente-sobre-silhueta-a-noite-36151384/">baixar o vídeo aqui</a></p>
+            </video>
+        </article>
+        <br>
+  
+        <article>
+            <h3>Áudio Local</h3>
+            <audio controls aria-label="Áudio complementar da página">
+                <source src="arquivos/musiclua.mp3" type="audio/mpeg">
+                <source src="arquivos/musiclua.wav" type="audio/wav">
+                <p>Seu navegador não suporta a tag de áudio. Você pode <a href="https://pixabay.com/pt/music/orquestral-midnight-in-the-saloon-602652/">baixar o áudio aqui</a></p>
+            </audio>
+            <details>
+                <summary>Transcrição do Áudio</summary>
+                <p>Som de uma música orquestral tocando em um saloon à meia-noite.</p>
+            </details>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2026 Página de Bernardo Eliziario. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

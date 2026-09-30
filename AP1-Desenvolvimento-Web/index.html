@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início | Pulso Academia</title>
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!--CSS-->
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!--Header com logo local (img local) e nav comum às 3 páginas.
+        Em desktop o CSS deixa a marca à esquerda e o nav à direita na mesma linha.-->
+    <header class="cabecalho">
+      <a class="marca" href="index.html">
+        <img src="imagens/logo.svg" alt="logo pulso academia" width="44" height="44">
+        <span>Pulso Academia</span>
+      </a>
+      <nav>
+        <!--.pagina-atual marca o link da página em que o usuário está.-->
+        <a href="index.html" class="pagina-atual">Início</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+    </header>
+    <main>
+      <!--Imagem local no main do index.-->
+      <section class="apresentacao">
+        <div>
+          <p class="destaque">Bem-vindo à Pulso</p>
+          <h1 id="titulo">Movimente-se no seu ritmo.</h1>
+          <p>Um espaço para cuidar de você, ganhar força e ter mais disposição no dia a dia.</p>
+          <a class="botao" href="servicos.html">Conheça nossos serviços</a>
+        </div>
+        <img class="foto" src="imagens/academia.jpg" alt="Área de musculação com halteres e bancos de treino" width="1600" height="1067">
+      </section>
+
+      <!--Section com 3 colunas em desktop e 1 coluna em mobile.-->
+      <section>
+        <h2 id="beneficios">Por que treinar com a gente?</h2>
+        <div class="beneficios">
+          <article>
+            <h3>Orientação</h3>
+            <p>Conte com uma equipe para acompanhar seus exercícios e sua evolução.</p>
+          </article>
+          <article>
+            <h3>Estrutura</h3>
+            <p>Equipamentos e um ambiente organizado para a sua rotina de treino.</p>
+          </article>
+          <article>
+            <h3>Seu ritmo</h3>
+            <p>Atividades para diferentes níveis, do primeiro treino aos novos desafios.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+    <!--Footer comum com copyright e nav de redes sociais com ícones do Font Awesome.
+        target="_blank" abre o link em nova aba; rel="noopener noreferrer" evita que a página
+        aberta tenha acesso a outros dados.-->
+    <footer class="rodape">
+      <p>&copy; 2026 Pulso Academia. Todos os direitos reservados.</p>
+      <nav>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-instagram"></i> Instagram
+        </a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-facebook-f"></i> Facebook
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-youtube"></i> YouTube
+        </a>
+      </nav>
+    </footer>
+  </body>
+</html>
