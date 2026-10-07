@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Loja | (Exemplo DOM)</title>
+</head>
+<body>
+    <header>
+        <h1 id="titulo">Minha Loja</h1> <!-- id: normalmente identifica um único elemento -->
+    </header>
+    <main id="main1">
+        <p class="produto">Produto 1</p> <!-- class: normalmente identifica um grupo de elementos -->
+        <p class="produto">Produto 2</p>
+        <p class="produto">Produto 3</p>
+    </main>
+    <footer>
+        &copy; 2026 - Todos os direitos reservados
+    </footer>
+
+    <script> // Script: tag que permite a inserção de código JavaScript em uma página HTML
+
+        // Exemplo de manipulação do DOM (Document Object Model) com JavaScript
+
+        let titulo = document.getElementById("titulo"); // let titulo: variável que recebe o elemento com id "titulo"
+        let main = document.getElementById("main1"); // let main: variável que recebe o elemento com id "main1"
+
+        console.log(titulo); // Exibe o elemento com id "titulo" no console(inspecionar no navegador)
+        console.log(main); // Exibe o elemento com id "main1" no console(inspecionar no navegador)
+
+        // Exemplo de manipulação de variáveis em JavaScript
+
+        let frase = "Esta é minha loja de produtos Apple(frase em string)";
+        console.log(frase); // Exibe a variável "frase" no console
+
+        let outraExpressao = "Bom dia!";
+        console.log(outraExpressao + frase); // Exemplo de concatenação de string em js
+
+        console.log(`Agora estou dando um exemplo de interpolacão de string em js. ${outraExpressao}`); // Exemplo de interpolação de string em js
+
+    </script>
+</body>
+</html>

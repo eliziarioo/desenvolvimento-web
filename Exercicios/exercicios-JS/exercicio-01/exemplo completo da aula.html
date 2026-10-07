@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Loja | (Exemplo Completo da Aula)</title>
+</head>
+<body id="body1">
+    <header>
+        <h1 id="titulo" onclick="boasVindas()">Clique aqui!</h1>
+    </header>
+    <main id="main1">
+        <p class="produto">Produto 1</p>
+        <p class="produto">Produto 2</p>
+        <p class="produto">Produto 3</p>
+
+        <button onclick="laco()">Clique aqui para criar botões</button> <!-- Função que cria botões dinamicamente -->
+    </main>
+    <footer id="footer1" onclick="footerClick()"> <!-- Função que altera a cor de fundo da página para amarelo -->
+        &copy; 2026 - Todos os direitos reservados
+    </footer>
+
+    <script>
+
+      // Exemplo de manipulação do DOM (Document Object Model) com JavaScript
+
+      function boasVindas() {
+        const nome = window.prompt("Olá, qual é o seu nome?");
+        window.alert(`Olá ${nome}, seja bem-vindo(a) a minha loja de produtos Apple!`);
+        document.getElementById("titulo").innerText = `Bem-vindo(a), ${nome}!`;
+      }
+
+      function footerClick() {
+        const corpo = window.alert("Seu Footer foi clicado! Tema alterado!");
+        document.getElementById("body1").style.backgroundColor = "yellow";
+      }
+      function laco() { // Função que cria botões dinamicamente
+        const main = document.getElementById("main1"); // Seleciona o elemento main com id "main1"
+        for (let i=1; i<5; i++) { // Laço de repetição que cria 4 botões com o texto "1", "2", "3" e "4"
+            let bot = document.createElement("button"); // Cria um elemento button
+            bot.innerHTML = i; // Adiciona o texto do botão com o valor de i
+            main.append(bot); // Adiciona o botão criado ao elemento main
+        }
+      }
+    
+    </script>
+</body>
+</html>

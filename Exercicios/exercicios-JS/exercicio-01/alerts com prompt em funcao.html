@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Loja | (Exemplo Alert + Prompt em Função JS)</title>
+</head>
+<body id="body1"> <!-- id: geralmente usado para identificar únicos elementos no DOM -->
+    <header>
+        <h1 id="titulo" onclick="boasVindas()">Clique aqui!</h1> <!-- onclick: evento que ocorre quando o usuário clica no elemento, permite executar uma função(no caso "boasVindas") -->
+    </header>
+    <main id="main1" onclick="mainClick()"> <!-- onclick: evento que ocorre quando o usuário clica no elemento, permite executar uma função(no caso "mainClick") -->
+        <p class="produto">Produto 1</p>
+        <p class="produto">Produto 2</p>
+        <p class="produto">Produto 3</p>
+    </main>
+    <footer>
+        &copy; 2026 - Todos os direitos reservados
+    </footer>
+
+    <script>
+
+       // Exemplo de manipulação do DOM (Document Object Model) com JavaScript
+       
+       // Função que exibe um prompt para o usuário informar seu nome, exibe um alerta de boas-vindas e altera o título da página com o nome informado
+      function boasVindas() {
+        const nome = window.prompt("Olá, qual é o seu nome?");
+        window.alert(`Olá ${nome}, seja bem-vindo(a) a minha loja de produtos Apple!`);
+        document.getElementById("titulo").innerText = `Bem-vindo(a), ${nome}!`;
+      }
+
+      // Função que exibe um alerta informando que o main foi clicado e altera a cor de fundo da página para amarelo
+      function mainClick() {
+        const corpo = window.alert("Seu Main foi clicado! Tema alterado!"); // Exibe um alerta
+        document.getElementById("body1").style.backgroundColor = "yellow"; // Altera a cor de fundo da página para amarelo
+
+      }
+    </script>
+</body>
+</html>
