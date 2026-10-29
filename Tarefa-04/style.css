@@ -1,0 +1,138 @@
+/* Requisito 5 – estilização do formulário com CSS */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Requisito 5 – página ocupa a tela inteira, sem rolagem */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #eef2f7;
+  color: #333;
+}
+
+/* Requisito 5 – formulário centralizado na horizontal e na vertical */
+main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Requisito 5 – tamanho razoável; position relative para a div de sucesso se sobrepor */
+.container-form {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 1.5em;
+  text-align: center;
+  color: #1e3a5f;
+}
+
+/* Requisito 5 – elementos alinhados internamente (label, input e span em coluna) */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2b6cb0;
+}
+
+/* Requisito 3 – borda vermelha no input com erro */
+input.input-erro {
+  border-color: red;
+}
+
+/* Requisito 3 – mensagem de erro no span abaixo do input */
+.erro {
+  color: red;
+  font-size: 0.85em;
+  min-height: 1em;
+}
+
+button {
+  padding: 12px;
+  font-size: 1em;
+  font-weight: bold;
+  color: #fff;
+  background-color: #2b6cb0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1e4e8c;
+}
+
+/* Requisito 3 – div de sucesso sobreposta ao formulário (escondida até o envio) */
+.sucesso {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 30px;
+  text-align: center;
+  background-color: rgba(230, 255, 237, 0.97);
+  border: 2px solid #2f855a;
+  border-radius: 10px;
+}
+
+/* Requisito 3 – classe adicionada pelo JavaScript para mostrar a div */
+.sucesso.ativo {
+  display: flex;
+}
+
+.sucesso h2 {
+  color: #2f855a;
+}
+
+.sucesso button {
+  background-color: #2f855a;
+  padding: 10px 30px;
+}
+
+.sucesso button:hover {
+  background-color: #276749;
+}
