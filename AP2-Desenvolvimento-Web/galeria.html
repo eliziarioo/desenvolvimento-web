@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Galeria com todos os pokémons: busque pelo nome ou pelo tipo e favorite os seus preferidos.">
+  <title>PokéColeção | Galeria</title>
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+
+  <!-- Conexão antecipada com a API e com o servidor das imagens dos cards (performance) -->
+  <link rel="preconnect" href="https://pokeapi.co">
+  <link rel="preconnect" href="https://raw.githubusercontent.com">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap">
+
+  <!-- REQ 1.2 Footer: ícones via FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- REQ 1.5 CSS e JS separados e linkados ao HTML -->
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/comum.js" defer></script>
+  <script src="js/galeria.js" defer></script>
+</head>
+<body>
+  <!-- REQ 7.2 Acessibilidade: link para pular direto ao conteúdo -->
+  <a class="pular-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- REQ 1.1 Header (igual nas 3 páginas): logo SVG, nav e link da página atual destacado (aria-current) -->
+  <header class="cabecalho">
+    <div class="container cabecalho__conteudo">
+      <a class="logo" href="index.html">
+        <img class="logo__img" src="img/logo.svg" alt="" width="40" height="40">
+        <span class="logo__texto">PokéColeção</span>
+      </a>
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__lista">
+          <li><a class="nav__link" href="index.html">Início</a></li>
+          <li><a class="nav__link" href="galeria.html" aria-current="page">Galeria</a></li>
+          <li>
+            <!-- REQ 5.2 Contador no header, ao lado do link Favoritos (estilo carrinho) -->
+            <a class="nav__link" href="favoritos.html">
+              Favoritos
+              <span class="contador" data-contador-favoritos>0</span>
+              <span class="visualmente-oculto"> pokémons na coleção</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" class="pagina">
+    <!-- REQ 3.1 Barra de busca no início do main, com mensagem clara (tipo OU nome) -->
+    <section class="busca" aria-labelledby="galeria-titulo">
+      <div class="container">
+        <h1 id="galeria-titulo" class="pagina__titulo">Galeria de pokémons</h1>
+        <form class="busca__form" id="form-busca" role="search" novalidate>
+          <label class="busca__rotulo" for="campo-busca">
+            Busque por <strong>tipo de pokémon</strong> ou pelo <strong>nome de um pokémon específico</strong>
+          </label>
+          <div class="busca__linha">
+            <div class="busca__campo">
+              <i class="fa-solid fa-magnifying-glass busca__icone" aria-hidden="true"></i>
+              <input class="busca__input" type="search" id="campo-busca" name="q"
+                     placeholder="Ex.: fogo, water ou pikachu"
+                     autocomplete="off" spellcheck="false"
+                     aria-describedby="busca-dica">
+            </div>
+            <button class="botao botao--primario" type="submit">Buscar</button>
+            <button class="botao botao--secundario" type="button" id="botao-limpar">Ver todos</button>
+          </div>
+          <p class="busca__dica" id="busca-dica">
+            Digite um tipo em português ou inglês (veja a tabela abaixo) ou parte do nome em inglês, como “char”.
+            Deixe em branco para listar todos.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- REQ 3.2 Tabela ilustrativa com os tipos de pokémons (apoio à busca) -->
+    <section class="tipos" aria-labelledby="tipos-titulo">
+      <div class="container">
+        <div class="tipos__cartao">
+          <h2 id="tipos-titulo" class="tipos__titulo">Tabela de tipos de pokémon</h2>
+          <p class="tipos__texto">Clique em um tipo para buscá-lo direto, ou digite o nome dele na barra de busca.</p>
+          <div class="tabela-rolagem" tabindex="0" role="region" aria-labelledby="tipos-titulo">
+            <table class="tabela-tipos">
+              <caption class="visualmente-oculto">Tipos de pokémon, termos aceitos na busca e um exemplo de cada tipo</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">Digite na busca</th>
+                  <th scope="col">Exemplo</th>
+                </tr>
+              </thead>
+              <!-- Linhas geradas por JS (js/galeria.js) a partir da lista TIPOS em js/comum.js -->
+              <tbody id="tabela-tipos-corpo"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REQ 3.3 Listagem completa / REQ 4.2 Layout da galeria (1, 2 e 4 colunas) -->
+    <section class="resultados" aria-labelledby="resultados-titulo">
+      <div class="container">
+        <h2 id="resultados-titulo" class="visualmente-oculto">Resultados</h2>
+        <p class="resultados__status" id="status-galeria" role="status" aria-live="polite">Carregando pokémons…</p>
+        <ul class="grade" id="grade-galeria" aria-labelledby="resultados-titulo"></ul>
+        <div class="resultados__mais" id="sentinela">
+          <button class="botao botao--secundario" type="button" id="botao-mais" hidden>Carregar mais pokémons</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- REQ 1.2 Footer (igual nas 3 páginas): 3+ redes sociais (FontAwesome) e direitos autorais -->
+  <footer class="rodape">
+    <div class="container rodape__conteudo">
+      <ul class="redes" aria-label="Redes sociais">
+        <li><a class="redes__link" href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub (abre em nova aba)"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
+        <li><a class="redes__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (abre em nova aba)"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+        <li><a class="redes__link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (abre em nova aba)"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+        <li><a class="redes__link" href="https://x.com/" target="_blank" rel="noopener noreferrer" aria-label="X, antigo Twitter (abre em nova aba)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+      </ul>
+      <!-- REQ 1.3 Data dinâmica: preenchida por JS (js/comum.js) -->
+      <p class="rodape__data">Hoje é <time id="data-atual">…</time></p>
+      <p class="rodape__direitos">&copy; 2026 PokéColeção. Todos os direitos reservados. Dados fornecidos pela PokéAPI.</p>
+    </div>
+  </footer>
+</body>
+</html>

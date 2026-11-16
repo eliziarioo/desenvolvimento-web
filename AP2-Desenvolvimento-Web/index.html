@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PokéColeção: explore todos os pokémons, busque por nome ou tipo e monte sua coleção de favoritos.">
+  <title>PokéColeção | Início</title>
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+
+  <!-- REQ 6.2 Imagens e CLS: preload da imagem da hero (LCP) com srcset responsivo -->
+  <link rel="preload" as="image" type="image/webp"
+        imagesrcset="img/hero-800.webp 800w, img/hero-1200.webp 1200w, img/hero-1600.webp 1600w"
+        imagesizes="(min-width: 1024px) 50vw, 100vw" fetchpriority="high">
+
+  <!-- Fonte (display=swap evita texto invisível) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap">
+
+  <!-- REQ 1.2 Footer: ícones de redes sociais via FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- REQ 1.5 CSS separado e linkado ao HTML -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- REQ 1.5 JS separado e linkado ao HTML (defer: não bloqueia a renderização) -->
+  <script src="js/comum.js" defer></script>
+</head>
+<body>
+  <!-- REQ 7.2 Acessibilidade: link para pular direto ao conteúdo -->
+  <a class="pular-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- REQ 1.1 Header (igual nas 3 páginas): logo SVG, nav e link da página atual destacado (aria-current) -->
+  <header class="cabecalho">
+    <div class="container cabecalho__conteudo">
+      <a class="logo" href="index.html">
+        <img class="logo__img" src="img/logo.svg" alt="" width="40" height="40">
+        <span class="logo__texto">PokéColeção</span>
+      </a>
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav__lista">
+          <li><a class="nav__link" href="index.html" aria-current="page">Início</a></li>
+          <li><a class="nav__link" href="galeria.html">Galeria</a></li>
+          <li>
+            <!-- REQ 5.2 Contador no header, ao lado do link Favoritos (estilo carrinho) -->
+            <a class="nav__link" href="favoritos.html">
+              Favoritos
+              <span class="contador" data-contador-favoritos>0</span>
+              <span class="visualmente-oculto"> pokémons na coleção</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- REQ 2.1 Hero: imagem moderna em alta resolução, título, subtítulo e CTA para a galeria -->
+    <section class="hero" aria-labelledby="hero-titulo">
+      <div class="container hero__conteudo">
+        <div class="hero__texto">
+          <p class="hero__selo">Mais de 1.300 pokémons em um só lugar</p>
+          <h1 id="hero-titulo" class="hero__titulo">Encontre, compare e colecione seus pokémons favoritos</h1>
+          <p class="hero__subtitulo">
+            Explore a Pokédex completa com dados oficiais de HP, tipo, peso e altura.
+            Busque pelo nome ou pelo tipo e guarde os escolhidos na sua coleção pessoal.
+          </p>
+          <!-- REQ 2.1 CTA que leva à galeria -->
+          <a class="botao botao--cta" href="galeria.html">
+            Explorar a galeria
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <!-- REQ 6.2 Imagens e CLS: <picture> com WebP responsivo (srcset/sizes), width/height,
+             aspect-ratio no CSS, loading="eager", fetchpriority="high" e decoding="async" -->
+        <picture class="hero__imagem">
+          <source type="image/webp"
+                  srcset="img/hero-800.webp 800w, img/hero-1200.webp 1200w, img/hero-1600.webp 1600w"
+                  sizes="(min-width: 1024px) 50vw, 100vw">
+          <img src="img/hero-1600.jpg"
+               alt="Ilustração com Pikachu, Charizard e Greninja sobre um fundo roxo com anéis de luz"
+               width="1600" height="1200"
+               loading="eager" fetchpriority="high" decoding="async">
+        </picture>
+      </div>
+    </section>
+
+    <!-- REQ 2.2 Segunda seção: apresenta o que o site faz (galeria + favoritos como carrinho) -->
+    <section class="recursos" aria-labelledby="recursos-titulo">
+      <div class="container">
+        <h2 id="recursos-titulo" class="secao-titulo">O que você pode fazer aqui</h2>
+        <p class="secao-subtitulo">
+          A PokéColeção funciona como uma loja: você navega pela vitrine, escolhe os pokémons que mais gosta
+          e eles vão para a sua coleção, como itens em um carrinho de compras.
+        </p>
+
+        <ul class="recursos__lista">
+          <li class="recurso">
+            <span class="recurso__icone" aria-hidden="true"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <h3 class="recurso__titulo">Galeria de pokémons</h3>
+            <p>
+              Veja todos os pokémons da Pokédex em cards com imagem, HP, tipo, peso e altura.
+              Busque pelo nome de um pokémon específico ou filtre por tipo, como fogo, água ou planta.
+            </p>
+            <a class="recurso__link" href="galeria.html">Ir para a galeria</a>
+          </li>
+          <li class="recurso">
+            <span class="recurso__icone" aria-hidden="true"><i class="fa-solid fa-heart"></i></span>
+            <h3 class="recurso__titulo">Coleção de favoritos</h3>
+            <p>
+              Clique em <strong>Favoritar</strong> e o pokémon entra na sua coleção. O contador no topo
+              mostra quantos itens você já escolheu, e tudo fica salvo no seu navegador.
+            </p>
+            <a class="recurso__link" href="favoritos.html">Ver meus favoritos</a>
+          </li>
+          <li class="recurso">
+            <span class="recurso__icone" aria-hidden="true"><i class="fa-solid fa-receipt"></i></span>
+            <h3 class="recurso__titulo">Resumo da coleção</h3>
+            <p>
+              Como o resumo de um carrinho, a página de favoritos calcula a média de peso, altura e HP
+              dos escolhidos e lista os tipos presentes na sua coleção.
+            </p>
+            <a class="recurso__link" href="favoritos.html">Ver o resumo</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- REQ 1.2 Footer (igual nas 3 páginas): 3+ redes sociais (FontAwesome) e direitos autorais -->
+  <footer class="rodape">
+    <div class="container rodape__conteudo">
+      <ul class="redes" aria-label="Redes sociais">
+        <li><a class="redes__link" href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub (abre em nova aba)"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
+        <li><a class="redes__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (abre em nova aba)"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+        <li><a class="redes__link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (abre em nova aba)"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+        <li><a class="redes__link" href="https://x.com/" target="_blank" rel="noopener noreferrer" aria-label="X, antigo Twitter (abre em nova aba)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+      </ul>
+      <!-- REQ 1.3 Data dinâmica: preenchida por JS (js/comum.js) -->
+      <p class="rodape__data">Hoje é <time id="data-atual">…</time></p>
+      <p class="rodape__direitos">&copy; 2026 PokéColeção. Todos os direitos reservados. Dados fornecidos pela PokéAPI.</p>
+    </div>
+  </footer>
+</body>
+</html>

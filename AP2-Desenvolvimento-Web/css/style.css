@@ -1,0 +1,997 @@
+/* =========================================================================
+   css/style.css — estilos das 3 páginas (Index, Galeria, Favoritos)
+   REQ 1.5: CSS separado do HTML e linkado no <head>.
+   REQ 6.1: abordagem MOBILE FIRST — os estilos base valem para celulares
+            e as media queries (min-width) adicionam ajustes para:
+              • 600px  → tablets
+              • 1024px → desktops
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   REQ 7.1 Estilo: paleta harmoniosa (azul-marinho + vermelho + amarelo)
+   definida em variáveis para manter consistência em todo o site.
+   ------------------------------------------------------------------------- */
+:root {
+  --cor-marinho: #161b45;
+  --cor-marinho-2: #232a6b;
+  --cor-roxo: #3d1f6e;
+  --cor-vermelho: #c81d33;
+  --cor-vermelho-escuro: #a3172a;
+  --cor-amarelo: #ffcb05;
+  --cor-amarelo-claro: #ffe27a;
+  --cor-fundo: #f4f5fb;
+  --cor-superficie: #ffffff;
+  --cor-texto: #1b1f3b;
+  --cor-texto-suave: #4a5070;
+  --cor-borda: #dde0ee;
+
+  --raio: 16px;
+  --raio-pequeno: 10px;
+  --sombra: 0 4px 16px rgba(22, 27, 69, 0.08);
+  --sombra-forte: 0 12px 28px rgba(22, 27, 69, 0.16);
+  --largura-max: 1200px;
+  --espaco-lateral: 1rem;
+  --altura-header: 116px; /* mobile: logo em uma linha e nav na outra */
+
+  --fonte: 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ---------------------------- Reset básico ------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* REQ 1.4 Nav estável: reserva sempre o espaço da barra de rolagem.
+   Assim, páginas curtas (sem scroll) e longas (com scroll) têm a mesma
+   largura útil e os itens do nav NÃO "pulam" ao trocar de página. */
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll; /* reforço para navegadores sem suporte a scrollbar-gutter */
+  scroll-padding-top: calc(var(--altura-header) + 1rem); /* âncoras não ficam sob o header fixo */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--fonte);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+}
+
+main {
+  flex: 1;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+/* REQ 6.2: imagens nunca estouram o container e mantêm a proporção */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: var(--cor-vermelho);
+}
+
+button {
+  font: inherit;
+}
+
+/* Atributo hidden sempre vence o display definido nas classes */
+[hidden] {
+  display: none !important;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: var(--espaco-lateral);
+}
+
+/* -------------------------------------------------------------------------
+   REQ 7.2 Acessibilidade
+   ------------------------------------------------------------------------- */
+/* Texto lido por leitores de tela, mas invisível na tela */
+.visualmente-oculto {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Link "pular para o conteúdo": aparece apenas ao receber foco pelo teclado */
+.pular-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  border-radius: var(--raio-pequeno);
+  background: var(--cor-amarelo);
+  color: var(--cor-marinho);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.pular-link:focus {
+  top: 1rem;
+}
+
+/* Foco visível e com bom contraste em todos os elementos interativos */
+:focus-visible {
+  outline: 3px solid var(--cor-amarelo);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--cor-marinho);
+  border-radius: 4px;
+}
+
+/* Respeita quem prefere menos animação */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================================
+   REQ 1.1 Header — igual nas 3 páginas
+   ========================================================================= */
+.cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--cor-marinho);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+.cabecalho__conteudo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  /* REQ 1.4: altura mínima fixa — o header tem a mesma altura em todas as páginas */
+  min-height: var(--altura-header);
+  padding-block: 0.75rem;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+/* REQ 6.2: logo com tamanho fixo (sem CLS) */
+.logo__img {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.nav {
+  width: 100%; /* mobile: nav ocupa a linha inteira abaixo do logo */
+}
+
+.nav__lista {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+
+.nav__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px; /* área de toque confortável (acessibilidade) */
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  color: #e6e8f5;
+  text-decoration: none;
+  /* REQ 1.4: o peso da fonte NÃO muda no link ativo (mudar o peso altera a
+     largura do texto e faria o nav pular). Só cores e fundo mudam. */
+  font-weight: 700;
+  border: 2px solid transparent;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.nav__link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* REQ 1.1: link da página atual destacado dos demais */
+.nav__link[aria-current='page'] {
+  background: var(--cor-amarelo);
+  color: var(--cor-marinho);
+  border-color: var(--cor-amarelo);
+}
+
+/* REQ 5.2 Contador estilo carrinho (bolinha ao lado de "Favoritos") */
+.contador {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.6rem; /* largura mínima: o nav não pula quando o número muda */
+  height: 1.6rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: var(--cor-vermelho);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 0 2px var(--cor-marinho);
+  transition: transform 0.2s;
+}
+
+.contador--vazio {
+  background: #5a6087;
+}
+
+.nav__link[aria-current='page'] .contador {
+  box-shadow: 0 0 0 2px var(--cor-amarelo);
+}
+
+/* =========================================================================
+   Botões
+   ========================================================================= */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.6rem 1.25rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.botao:active {
+  transform: translateY(1px);
+}
+
+.botao:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.botao--primario {
+  background: var(--cor-vermelho);
+  color: #fff;
+}
+
+.botao--primario:hover {
+  background: var(--cor-vermelho-escuro);
+}
+
+.botao--secundario {
+  background: transparent;
+  color: var(--cor-marinho);
+  border-color: var(--cor-marinho);
+}
+
+.botao--secundario:hover {
+  background: var(--cor-marinho);
+  color: #fff;
+}
+
+.botao--cta {
+  background: var(--cor-amarelo);
+  color: var(--cor-marinho);
+  font-size: 1.1rem;
+  padding: 0.85rem 1.75rem;
+  box-shadow: 0 8px 24px rgba(255, 203, 5, 0.3);
+}
+
+.botao--cta:hover {
+  background: var(--cor-amarelo-claro);
+  transform: translateY(-2px);
+}
+
+/* =========================================================================
+   REQ 2.1 Hero (Index)
+   ========================================================================= */
+.hero {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(80, 160, 255, 0.25), transparent 45%),
+    linear-gradient(135deg, var(--cor-marinho) 0%, var(--cor-roxo) 100%);
+  color: #fff;
+  padding-block: 2.5rem 3rem;
+}
+
+.hero__conteudo {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.hero__selo {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 203, 5, 0.15);
+  color: var(--cor-amarelo);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.hero__titulo {
+  /* clamp(): tipografia fluida entre celular e desktop */
+  font-size: clamp(2rem, 6vw + 0.5rem, 3.4rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.hero__subtitulo {
+  font-size: clamp(1.05rem, 1vw + 0.9rem, 1.25rem);
+  color: #d9dcf2;
+  max-width: 38rem;
+  margin-bottom: 2rem;
+}
+
+/* REQ 6.2 Imagens e CLS: proporção reservada antes do download (aspect-ratio
+   igual ao width/height do HTML = 1600x1200 = 4/3), largura fluida. */
+.hero__imagem img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: calc(var(--raio) * 1.5);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+  background-color: var(--cor-marinho-2); /* cor de espera enquanto carrega */
+}
+
+/* =========================================================================
+   REQ 2.2 Segunda seção (Index): o que o site faz
+   ========================================================================= */
+.recursos {
+  padding-block: 3.5rem;
+}
+
+.secao-titulo {
+  font-size: clamp(1.6rem, 3vw + 0.8rem, 2.2rem);
+  font-weight: 800;
+  text-align: center;
+  color: var(--cor-marinho);
+}
+
+.secao-titulo--esquerda {
+  text-align: left;
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.secao-subtitulo {
+  max-width: 44rem;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+  color: var(--cor-texto-suave);
+  font-size: 1.1rem;
+}
+
+.recursos__lista {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.recurso {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.75rem;
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  box-shadow: var(--sombra);
+  border-top: 4px solid var(--cor-vermelho);
+}
+
+.recurso__icone {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: var(--cor-marinho);
+  color: var(--cor-amarelo);
+  font-size: 1.35rem;
+}
+
+.recurso__titulo {
+  font-size: 1.3rem;
+  color: var(--cor-marinho);
+}
+
+.recurso p {
+  color: var(--cor-texto-suave);
+  flex: 1;
+}
+
+.recurso__link {
+  font-weight: 800;
+}
+
+/* =========================================================================
+   Páginas internas (Galeria e Favoritos)
+   ========================================================================= */
+.pagina {
+  padding-block: 2rem 3rem;
+}
+
+.pagina__titulo {
+  font-size: clamp(1.8rem, 3vw + 1rem, 2.5rem);
+  font-weight: 800;
+  color: var(--cor-marinho);
+}
+
+.pagina__titulo:focus {
+  outline: none; /* recebe foco só via JS (após remover o último favorito) */
+}
+
+/* =========================================================================
+   REQ 3.1 Barra de busca (início do main da Galeria)
+   ========================================================================= */
+.busca__form {
+  padding: 1.25rem;
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  box-shadow: var(--sombra);
+}
+
+.busca__rotulo {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  color: var(--cor-marinho);
+}
+
+.busca__linha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.busca__campo {
+  position: relative;
+  flex: 1 1 100%; /* mobile: campo ocupa a linha inteira; botões abaixo */
+}
+
+.busca__icone {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--cor-texto-suave);
+  pointer-events: none;
+}
+
+.busca__input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.6rem 1rem 0.6rem 2.75rem;
+  border: 2px solid var(--cor-borda);
+  border-radius: 999px;
+  font: inherit;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+}
+
+.busca__input:focus-visible {
+  border-color: var(--cor-marinho);
+  box-shadow: none;
+  outline-offset: 2px;
+}
+
+.busca__linha .botao {
+  flex: 1 1 0;
+}
+
+.busca__dica {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+/* =========================================================================
+   REQ 3.2 Tabela ilustrativa dos tipos
+   ========================================================================= */
+.tipos {
+  margin-top: 1.5rem;
+}
+
+.tipos__cartao {
+  padding: 1.25rem;
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  box-shadow: var(--sombra);
+}
+
+.tipos__titulo {
+  font-size: 1.25rem;
+  color: var(--cor-marinho);
+}
+
+.tipos__texto {
+  color: var(--cor-texto-suave);
+  font-size: 0.95rem;
+}
+
+/* No celular, a tabela pode rolar na horizontal sem quebrar o layout */
+.tabela-rolagem {
+  overflow-x: auto;
+  border-radius: var(--raio-pequeno);
+  border: 1px solid var(--cor-borda);
+}
+
+.tabela-tipos {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.tabela-tipos th,
+.tabela-tipos td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tabela-tipos thead th {
+  background: var(--cor-marinho);
+  color: #fff;
+  font-weight: 700;
+}
+
+.tabela-tipos tbody tr:nth-child(even) {
+  background: var(--cor-fundo);
+}
+
+.tabela-tipos code {
+  padding: 0.1rem 0.4rem;
+  border-radius: 6px;
+  background: #e8eaf6;
+  font-size: 0.9em;
+}
+
+/* Selo colorido de tipo (cores definidas por tipo no JS via variáveis) */
+.selo-tipo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  background: var(--tipo-fundo, #5a6087);
+  color: var(--tipo-texto, #fff);
+  font-size: 0.85rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.selo-tipo--botao {
+  min-width: 6.5rem;
+  min-height: 32px;
+  justify-content: center;
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.selo-tipo--botao:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.selo-tipo__qtd {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.9;
+}
+
+/* =========================================================================
+   REQ 3.3 Resultados / status da listagem
+   ========================================================================= */
+.resultados {
+  margin-top: 2rem;
+}
+
+.resultados__status {
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+  color: var(--cor-texto-suave);
+}
+
+.resultados__mais {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  min-height: 48px;
+}
+
+/* =========================================================================
+   REQ 4.2 Layout da galeria (mesmo grid usado nos Favoritos — REQ 5.3)
+   Mobile first: 1 coluna → tablet: 2 colunas → desktop: 4 colunas
+   ========================================================================= */
+.grade {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile: 1 coluna */
+  gap: 1.25rem;
+}
+
+/* =========================================================================
+   REQ 4.1 Cards — elementos em COLUNA e CENTRALIZADOS no contra eixo
+   (flex-direction: column + align-items: center)
+   ========================================================================= */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centraliza no contra eixo (horizontal) */
+  height: 100%;
+  padding: 1.25rem 1.25rem 1.5rem;
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  box-shadow: var(--sombra);
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-forte);
+}
+
+/* REQ 6.2 Imagens e CLS: espaço reservado com aspect-ratio 1/1 (igual ao
+   width/height=240 do HTML), fundo enquanto carrega e object-fit. */
+.card__imagem {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #eef0fa 0%, #e2e5f5 70%);
+}
+
+.card__numero {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--cor-texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.card__nome {
+  margin: 0.15rem 0 0.6rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--cor-marinho);
+}
+
+.card__tipos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.card__dados {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0 0 1.25rem;
+}
+
+.card__dado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0.25rem;
+  border-radius: var(--raio-pequeno);
+  background: var(--cor-fundo);
+}
+
+.card__dado dt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--cor-texto-suave);
+}
+
+.card__dado dd {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--cor-texto);
+  font-variant-numeric: tabular-nums;
+}
+
+/* empurra o botão para o rodapé do card: todos os botões ficam alinhados */
+.card .botao {
+  margin-top: auto;
+  width: 100%;
+}
+
+/* REQ 5.1 Botão favoritar */
+.botao--favoritar {
+  background: transparent;
+  color: var(--cor-vermelho);
+  border-color: var(--cor-vermelho);
+}
+
+.botao--favoritar:hover {
+  background: #fdecee;
+}
+
+.botao--favoritar[aria-pressed='true'] {
+  background: var(--cor-vermelho);
+  color: #fff;
+}
+
+.botao--favoritar[aria-pressed='true']:hover {
+  background: var(--cor-vermelho-escuro);
+}
+
+/* REQ 5.4 Botão remover */
+.botao--remover {
+  background: var(--cor-marinho);
+  color: #fff;
+}
+
+.botao--remover:hover {
+  background: var(--cor-vermelho);
+}
+
+/* =========================================================================
+   REQ 5.5 Resumo estilo carrinho (topo da página Favoritos)
+   ========================================================================= */
+.resumo {
+  padding: 1.5rem;
+  border-radius: var(--raio);
+  background: linear-gradient(135deg, var(--cor-marinho) 0%, var(--cor-roxo) 100%);
+  color: #fff;
+  box-shadow: var(--sombra-forte);
+}
+
+.resumo__titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.35rem;
+}
+
+.resumo__titulo i {
+  color: var(--cor-amarelo);
+}
+
+.resumo__metricas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.metrica {
+  padding: 0.85rem 1rem;
+  border-radius: var(--raio-pequeno);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.metrica dt {
+  font-size: 0.85rem;
+  color: #c9cde8;
+}
+
+.metrica dd {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--cor-amarelo);
+  font-variant-numeric: tabular-nums;
+}
+
+.resumo__subtitulo {
+  font-size: 1rem;
+  color: #c9cde8;
+}
+
+.resumo__tipos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.resumo__sem-tipos {
+  color: #c9cde8;
+}
+
+/* Estado vazio dos favoritos */
+.vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1.5rem;
+  border-radius: var(--raio);
+  border: 2px dashed var(--cor-borda);
+  background: var(--cor-superficie);
+  text-align: center;
+  color: var(--cor-texto-suave);
+}
+
+.vazio__icone {
+  font-size: 2.5rem;
+  color: var(--cor-vermelho);
+  margin-bottom: 0.75rem;
+}
+
+/* =========================================================================
+   REQ 1.2 Footer — igual nas 3 páginas
+   ========================================================================= */
+.rodape {
+  margin-top: auto;
+  padding-block: 2rem;
+  background: var(--cor-marinho);
+  color: #d9dcf2;
+  text-align: center;
+}
+
+.rodape__conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.redes {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.redes__link {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.redes__link:hover {
+  background: var(--cor-amarelo);
+  color: var(--cor-marinho);
+  transform: translateY(-2px);
+}
+
+.rodape__data {
+  margin: 0;
+  font-weight: 700;
+  color: #fff;
+}
+
+.rodape__direitos {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* =========================================================================
+   REQ 6.1 Responsividade — TABLET (a partir de 600px)
+   ========================================================================= */
+@media (min-width: 600px) {
+  :root {
+    --espaco-lateral: 1.5rem;
+    --altura-header: 72px; /* logo e nav na mesma linha */
+  }
+
+  .nav {
+    width: auto;
+  }
+
+  .nav__lista {
+    gap: 0.5rem;
+  }
+
+  /* REQ 4.2: 2 colunas em tablets */
+  .grade {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .busca__campo {
+    flex: 1 1 280px;
+  }
+
+  .busca__linha .botao {
+    flex: 0 0 auto;
+  }
+
+  .recursos__lista {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .resumo__metricas {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .rodape__conteudo {
+    gap: 0.75rem;
+  }
+}
+
+/* =========================================================================
+   REQ 6.1 Responsividade — DESKTOP (a partir de 1024px)
+   ========================================================================= */
+@media (min-width: 1024px) {
+  :root {
+    --espaco-lateral: 2rem;
+  }
+
+  /* Hero em duas colunas: texto à esquerda e imagem à direita */
+  .hero {
+    padding-block: 4.5rem;
+  }
+
+  .hero__conteudo {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .recursos__lista {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* REQ 4.2: 4 colunas em desktop */
+  .grade {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .resumo {
+    padding: 2rem;
+  }
+}
